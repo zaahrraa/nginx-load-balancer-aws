@@ -62,7 +62,7 @@ aws configure
 
 > **Note:** Create an IAM user with programmatic access in AWS Console → IAM → Users → Create user → Attach `AdministratorAccess` (for learning purposes) or scope permissions down later.
 
-## ⚡ Quick Start
+## Quick Start
 
 ```bash
 # Clone the repository
@@ -85,7 +85,7 @@ terraform apply
 curl http://$(terraform output -raw lb_public_ip)
 ```
 
-## 📁Project Structure
+## Project Structure
 
 ```
 terraform/
@@ -153,31 +153,6 @@ Request 4: Hello from Backend Server B
 ### Browser Test
 
 Open `http://<LB_PUBLIC_IP>` in your browser and refresh multiple times to see the alternating responses.
-
-## 💰 Cost & Safety
-
-### Costs
-- **`t2.micro`** instances are free-tier eligible (750 hours/month for 12 months)
-- Outside free tier: ~$0.0116/hour per instance × 3 instances = ~$0.035/hour
-- **Total for 1 hour demo:** < $0.05
-
-### ⚠️ Important Safety Notes
-
-```bash
-# ALWAYS destroy resources after testing
-terraform destroy
-```
-
-- **Set up AWS Budget Alarms** as a safety net
-- **Never leave instances running** when not in use
-- **Remove SSH public key** from AWS after destruction
-- **Delete the PEM file** after cleanup: `rm nginx-lb-key.pem`
-
-### Billing Alarm Setup (Recommended)
-
-1. Go to AWS Console → Budgets
-2. Create a budget with $1/month threshold
-3. Set up email alerts at 50% and 100%
 
 ## Cleanup
 
