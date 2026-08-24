@@ -63,7 +63,7 @@ Note: Create an IAM user with programmatic access in AWS Console -> IAM -> Users
 
 ```
 # Clone the repository
-git clone https://github.com/yourusername/nginx-lb-terraform.git
+git clone https://github.com/zaahrraa/nginx-lb-terraform.git
 cd nginx-lb-terraform/terraform
 
 # Initialize Terraform
