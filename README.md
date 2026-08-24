@@ -4,7 +4,7 @@ Here's a complete README.md for your NGINX Load Balancer project:
 
 # NGINX Load Balancer on AWS EC2 with Terraform
 
-Deploy a fully functional NGINX load balancer across real AWS EC2 instances using Terraform. Perfect for portfolio demonstrations, learning infrastructure-as-code, or understanding how load balancers work in the cloud.
+Deploy a fully functional NGINX load balancer across real AWS EC2 instances using Terraform. 
 
 ## Overview
 
