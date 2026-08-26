@@ -21,26 +21,7 @@ This project demonstrates a production-like load balancing setup on AWS:
 - Clean terraform destroy for complete removal
 
 ## Architecture
-
-```
-Internet
-    |
-    v
-+-------------------------+
-|  NGINX Load Balancer    |  (t2.micro, public IP)
-|  - Round-robin routing  |
-+-----------+-------------+
-            |
-      +-----+-----+
-      |           |
-      v           v
-+---------+ +---------+
-| Backend | | Backend |  (t2.micro, private IPs)
-| Server A| | Server B|
-| "Hello  | | "Hello  |
-| from A" | | from B" |
-+---------+ +---------+
-```
+ [Filename](diagram/architecture-diagram.png)
 
 ## Prerequisites
 
@@ -129,13 +110,11 @@ cidr_blocks = ["YOUR_IP_ADDRESS/32"]  # Replace with your actual IP
 ### Command Line Test for Linux / macOS (Bash)
 
 ```
-# Get the load balancer IP
-LB_IP=$(terraform output -raw lb_public_ip)
-
-# Send 10 requests to see round-robin distribution
-for i in {1..10}; do 
-    echo "Request $i: $(curl -s http://$LB_IP)"
-done
+$LB_IP = (terraform output -raw lb_public_ip)
+1..6 | ForEach-Object { 
+    $response = Invoke-WebRequest -Uri "http://$LB_IP" -UseBasicParsing
+    Write-Host "Request $_ : $($response.Content)" 
+}
 ```
 
 Expected Output:
