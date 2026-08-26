@@ -21,7 +21,7 @@ This project demonstrates a production-like load balancing setup on AWS:
 - Clean terraform destroy for complete removal
 
 ## Architecture
- [Filename](diagram/architecture-diagram.png)
+![Architecture Diagram](diagram/architecture-diagram.png)
 
 ## Prerequisites
 
