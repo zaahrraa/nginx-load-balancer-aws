@@ -107,30 +107,6 @@ cidr_blocks = ["YOUR_IP_ADDRESS/32"]  # Replace with your actual IP
 
 ## Testing the Load Balancer
 
-### Command Line Test for Linux / macOS (Bash)
-
-```
-$LB_IP = (terraform output -raw lb_public_ip)
-1..6 | ForEach-Object { 
-    $response = Invoke-WebRequest -Uri "http://$LB_IP" -UseBasicParsing
-    Write-Host "Request $_ : $($response.Content)" 
-}
-```
-
-Expected Output:
-```
-Request 1: Hello from Backend Server A
-Request 2: Hello from Backend Server B
-Request 3: Hello from Backend Server A
-Request 4: Hello from Backend Server B
-Request 5: Hello from Backend Server A
-Request 6: Hello from Backend Server B
-Request 7: Hello from Backend Server A
-Request 8: Hello from Backend Server B
-Request 9: Hello from Backend Server A
-Request 10: Hello from Backend Server B
-```
-
 ### Command Line Test for Windows (PowerShell)
 
 ```
@@ -154,47 +130,11 @@ Request 5 : Hello from Backend Server A
 Request 6 : Hello from Backend Server B
 ```
 
-Alternative PowerShell Method:
-```
-# Using WebClient for simpler output
-$LB_IP = terraform output -raw lb_public_ip
-$webClient = New-Object System.Net.WebClient
-
-1..6 | ForEach-Object {
-    $response = $webClient.DownloadString("http://$LB_IP").Trim()
-    Write-Host "Request $_ : $response"
-}
-```
-
-### Command Line Test for Windows (Git Bash / WSL)
-
-If you have Git Bash or WSL installed, you can use the bash commands:
-
-```
-# In Git Bash or WSL terminal
-LB_IP=$(terraform output -raw lb_public_ip)
-for i in {1..6}; do
-    echo "Request $i: $(curl -s http://$LB_IP)"
-done
-```
 
 ### Browser Test
 
 Open http://LB_PUBLIC_IP in your browser and refresh multiple times to see the alternating responses.
 
-### Quick One-Liner Tests
-
-Bash (Linux/macOS/Git Bash):
-```
-# One-liner to test 6 requests
-for i in {1..6}; do curl -s http://$(terraform output -raw lb_public_ip); echo " (Request $i)"; done
-```
-
-PowerShell (Windows):
-```
-# One-liner for quick testing
-$ip=terraform output -raw lb_public_ip; 1..6 | %{ Write-Host "Request $_ : $(Invoke-WebRequest -Uri http://$ip -UseBasicParsing).Content.Trim()" }
-```
 
 ### Troubleshooting PowerShell Commands
 
